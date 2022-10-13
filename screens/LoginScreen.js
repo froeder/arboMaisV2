@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Text, StyleSheet } from 'react-native';
+import styles from './Styles';
 import { Formik } from 'formik';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -24,10 +25,9 @@ export const LoginScreen = ({ navigation }) => {
     <>
       <View isSafe style={styles.container}>
         <KeyboardAwareScrollView enableOnAndroid={true}>
-          {/* LogoContainer: consits app logo and screen title */}
           <View style={styles.logoContainer}>
             <Logo uri={Images.logo} />
-            <Text style={styles.screenTitle}>Welcome back!</Text>
+            <Text style={styles.screenTitle}>Bem-vindo!</Text>
           </View>
           <Formik
             initialValues={{
@@ -50,7 +50,7 @@ export const LoginScreen = ({ navigation }) => {
                 <TextInput
                   name='email'
                   leftIconName='email'
-                  placeholder='Enter email'
+                  placeholder='Digite seu e-mail'
                   autoCapitalize='none'
                   keyboardType='email-address'
                   textContentType='emailAddress'
@@ -66,7 +66,7 @@ export const LoginScreen = ({ navigation }) => {
                 <TextInput
                   name='password'
                   leftIconName='key-variant'
-                  placeholder='Enter password'
+                  placeholder='Digite sua senha'
                   autoCapitalize='none'
                   autoCorrect={false}
                   secureTextEntry={passwordVisibility}
@@ -96,71 +96,20 @@ export const LoginScreen = ({ navigation }) => {
           <Button
             style={styles.borderlessButtonContainer}
             borderless
-            title={'Create a new account?'}
-            onPress={() => navigation.navigate('Signup')}
-          />
-          <Button
-            style={styles.borderlessButtonContainer}
-            borderless
-            title={'Forgot Password'}
+            title={'Recuperar senha'}
             onPress={() => navigation.navigate('ForgotPassword')}
           />
         </KeyboardAwareScrollView>
       </View>
 
-      {/* App info footer */}
+ 
       <View style={styles.footer}>
         <Text style={styles.footerText}>
-          Expo Firebase Starter App (based on managed workflow)
+          Criado por Jhonatan Froeder
         </Text>
       </View>
     </>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: Colors.white,
-    paddingHorizontal: 12
-  },
-  logoContainer: {
-    alignItems: 'center'
-  },
-  screenTitle: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: Colors.black,
-    paddingTop: 20
-  },
-  footer: {
-    backgroundColor: Colors.white,
-    paddingHorizontal: 12,
-    paddingBottom: 48,
-    alignItems: 'center'
-  },
-  footerText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: Colors.orange
-  },
-  button: {
-    width: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 8,
-    backgroundColor: Colors.orange,
-    padding: 10,
-    borderRadius: 8
-  },
-  buttonText: {
-    fontSize: 20,
-    color: Colors.white,
-    fontWeight: '700'
-  },
-  borderlessButtonContainer: {
-    marginTop: 16,
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+

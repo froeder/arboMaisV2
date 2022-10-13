@@ -2,7 +2,7 @@ import 'dotenv/config';
 
 export default {
   expo: {
-    name: 'Expo Firebase Starter',
+    name: 'ArboMais Cadastro',
     slug: 'expo-firebase',
     privacy: 'public',
     platforms: ['ios', 'android'],
@@ -12,7 +12,7 @@ export default {
     splash: {
       image: './assets/splash.png',
       resizeMode: 'cover',
-      backgroundColor: '#F57C00'
+      backgroundColor: '#9EA71D'
     },
     updates: {
       fallbackToCacheTimeout: 0
