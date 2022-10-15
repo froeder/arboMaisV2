@@ -7,17 +7,10 @@ import styles from "./Styles";
 
 import { auth } from "../config";
 
-export const HomeScreen = () => {
-  const handleLogout = () => {
-    signOut(auth).catch((error) => console.log("Error logging out: ", error));
-  };
-
+export const AddScreen = () => {
   return (
-    <View isSafe={} style={styles.container}>
-      <Text>Árvores</Text>
-      <Button style={styles.button} onPress={handleLogout}>
-        <Text style={styles.buttonText}>Sair</Text>
-      </Button>
+    <View isSafe={true} style={styles.container}>
+      <Text>Adicioanr</Text>
     </View>
   );
 };
