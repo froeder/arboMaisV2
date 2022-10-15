@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Button } from 'react-native';
+import { View, StyleSheet, Button, Text } from 'react-native';
 import { signOut } from 'firebase/auth';
 //Import styles
 import styles from './Styles';
@@ -14,6 +14,7 @@ export const HomeScreen = () => {
 
   return (
     <View style={styles.container}>
+      <Text>Árvores adicionadas</Text>
       <Button title='Sair' onPress={handleLogout} />
     </View>
   );
