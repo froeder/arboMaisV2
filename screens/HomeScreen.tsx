@@ -25,16 +25,20 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.setState({ trees });
   };
 
+  onPress = (item: Trees) => {
+    console.log(item);
+  };
+
   componentDidMount() {
     this.getTrees();
   }
 
   renderItem = ({ item }) => (
-    <Pressable style={styles.trees}>
-      <Text>
+    <Pressable style={styles.trees} onPress={() => this.onPress(item)}>
+      <Text style={styles.text_trees}>
         {item.numero} - {item.setor} - {item.nome_popular ?? "Sem nome popular"}{" "}
-        - {item.incompleto} -{" "}
-        {item.data_primeira_foto ? "Com foto" : "Sem foto"}
+        - {item.falta_campos ? "Incompleto" : "Completo"} -{" "}
+        {item.primeira_foto ? "Com foto" : "Sem foto"}
       </Text>
     </Pressable>
   );

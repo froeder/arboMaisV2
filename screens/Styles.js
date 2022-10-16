@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 12
+    paddingHorizontal: 8
   },
   logoContainer: {
     alignItems: 'center'
@@ -49,11 +49,13 @@ const styles = StyleSheet.create({
   trees:{
     flex:1,
     justifyContent:'center',
-    height: 40,
-    backgroundColor: Colors.primary,
-    margin:10,
-    padding:5
-  }
+    height:80,
+    backgroundColor: Colors.primaryTransparenci,
+    margin:2,
+    padding:10,
+    borderRadius:5
+  },
+  text_trees:{color:'white'}
 });
 
 export default styles;

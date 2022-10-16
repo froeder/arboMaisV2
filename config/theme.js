@@ -5,5 +5,6 @@ export const Colors = {
   white: '#ffffff',
   mediumGray: '#6e6869',
   red: '#fc5c65',
-  primary: '#9EA71D'
+  primary: '#9EA71D',
+  primaryTransparenci:'rgba(158, 167, 29, 0.5)'
 };

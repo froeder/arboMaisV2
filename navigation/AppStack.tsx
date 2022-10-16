@@ -8,6 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { AddScreen } from "../screens/AddScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
+import { AboutScreen } from "../screens/AboutScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -34,6 +35,7 @@ export default function AppStack() {
       <Drawer.Screen name="Início" component={HomeScreen} />
       <Drawer.Screen name="Adicionar" component={AddScreen} />
       <Drawer.Screen name="Perfil" component={ProfileScreen} />
+      <Drawer.Screen name="Sobre" component={AboutScreen} />
     </Drawer.Navigator>
   );
 }
