@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text } from "react-native";
+import { FlatList, Pressable, StyleSheet, Text } from "react-native";
 import { View, TextInput, Logo, Button, FormErrorMessage } from "../components";
 import { signOut } from "firebase/auth";
 //Import styles
@@ -22,18 +22,30 @@ export default class HomeScreen extends React.Component<Props, State> {
 
   getTrees = async () => {
     const trees = await getCollection("arvores");
-    console.log(trees);
+    this.setState({ trees });
   };
 
   componentDidMount() {
-    console.log("Teste");
     this.getTrees();
   }
+
+  renderFlatList = (data) => {
+    console.log(data);
+    return (
+      <Pressable>
+        <Text>{data.item.numero}</Text>
+      </Pressable>
+    );
+  };
 
   render() {
     return (
       <View isSafe={true} style={styles.container}>
-        <Text>Árvores</Text>
+        <FlatList
+          data={this.state.trees}
+          keyExtractor={(item) => item.video_id}
+          renderItem={this.renderFlatList}
+        />
       </View>
     );
   }
