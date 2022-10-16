@@ -29,22 +29,23 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.getTrees();
   }
 
-  renderFlatList = (data) => {
-    console.log(data);
-    return (
-      <Pressable>
-        <Text>{data.item.numero}</Text>
-      </Pressable>
-    );
-  };
+  renderItem = ({ item }) => (
+    <Pressable style={styles.trees}>
+      <Text>
+        {item.numero} - {item.setor} - {item.nome_popular ?? "Sem nome popular"}{" "}
+        - {item.incompleto} -{" "}
+        {item.data_primeira_foto ? "Com foto" : "Sem foto"}
+      </Text>
+    </Pressable>
+  );
 
   render() {
     return (
       <View isSafe={true} style={styles.container}>
         <FlatList
           data={this.state.trees}
-          keyExtractor={(item) => item.video_id}
-          renderItem={this.renderFlatList}
+          keyExtractor={(item) => item.id}
+          renderItem={this.renderItem}
         />
       </View>
     );

@@ -19,7 +19,11 @@ fa.getAuth().languageCode = "pt";
 const db = getFirestore();
 
 export async function getCollection(collectionName: string) {
-  const q = query(collection(db, collectionName));
+  const q = query(
+    collection(db, collectionName),
+    orderBy("numero"),
+    where("ativo", "==", "S")
+  );
   const querySnapshot = await getDocs(q);
   const data = querySnapshot.docs.map((doc) => doc.data());
   return data;

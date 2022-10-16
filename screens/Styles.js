@@ -45,6 +45,14 @@ const styles = StyleSheet.create({
     marginTop: 16,
     alignItems: 'center',
     justifyContent: 'center'
+  },
+  trees:{
+    flex:1,
+    justifyContent:'center',
+    height: 40,
+    backgroundColor: Colors.primary,
+    margin:10,
+    padding:5
   }
 });
 
