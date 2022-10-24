@@ -30,7 +30,9 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.setState({ trees });
   };
 
-  onPress = (item: Trees) => {};
+  onPress = (item: Trees) => {
+    this.props.navigation.navigate("Visualizar Árvore", { tree: item });
+  };
 
   formatedDate(date: string) {
     let data = date.split("-");

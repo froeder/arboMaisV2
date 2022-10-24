@@ -5,7 +5,7 @@ import { View } from "../components";
 import styles from "./Styles";
 import { NavigationProp } from "@react-navigation/core";
 
-export default class AddScreen extends React.Component<Props, State> {
+export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};
