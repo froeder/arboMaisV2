@@ -5,7 +5,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white,
-    paddingHorizontal: 8
+    paddingHorizontal: 10,
+    marginTop:10
   },
   logoContainer: {
     alignItems: 'center'
@@ -88,7 +89,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryTransparenci, 
     marginBottom:10,
     height:40,
-    width: "100%" 
+    width: "100%" ,
+    
   },
   button_toggle_group:{
     height:40,

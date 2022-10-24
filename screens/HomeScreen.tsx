@@ -30,9 +30,7 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.setState({ trees });
   };
 
-  onPress = (item: Trees) => {
-    console.log(item);
-  };
+  onPress = (item: Trees) => {};
 
   formatedDate(date: string) {
     let data = date.split("-");
@@ -60,7 +58,6 @@ export default class HomeScreen extends React.Component<Props, State> {
   };
 
   filterButtonGroup(val) {
-    console.log(val);
     if (val == "Incompleto") {
       this.filteHasComplete();
     } else if (val == "Sem Foto") {
@@ -95,7 +92,7 @@ export default class HomeScreen extends React.Component<Props, State> {
         <Text style={styles.title_item_tree}>
           {item.numero} - {item.nome_popular ?? "Sem nome popular"} /
         </Text>
-        <Text style={styles.tree_specie}> {item.especie}</Text>
+        <Text style={styles.tree_specie}> {item.especie ?? "Sem espécie"}</Text>
       </View>
       <View isSafe={false} style={styles.tree_date}>
         <Text style={styles.text_trees}>
@@ -112,10 +109,13 @@ export default class HomeScreen extends React.Component<Props, State> {
 
   render() {
     return (
-      <View isSafe={true} style={styles.container}>
+      <View isSafe={false} style={styles.container}>
         <SearchBar
           style={styles.search_bar}
           placeholder="Buscar"
+          placeholderTextColor="#FFFFFF"
+          clearIconImageStyle={{ tintColor: "#FFFFFF" }}
+          searchIconImageStyle={{ tintColor: "#FFFFFF" }}
           onChangeText={(text) => {
             this.setState({ searchText: text });
             this.filterList(text);
