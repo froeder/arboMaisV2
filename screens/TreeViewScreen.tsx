@@ -1,5 +1,5 @@
 import React from "react";
-import { Image, Text } from "react-native";
+import { Image, ScrollView, Text } from "react-native";
 import { View } from "../components";
 //Import styles
 import styles from "./Styles";
@@ -27,14 +27,22 @@ export default class TreeViewScreen extends React.Component<Props, State> {
 
   render() {
     return (
-      <View isSafe={false} style={styles.container}>
+      <ScrollView style={styles.container}>
         {this.state.arvore1_url && (
           <Image
             style={styles.image_tree}
             source={{ uri: this.state.arvore1_url }}
           />
         )}
-      </View>
+        <View isSafe={false}>
+          <Text style={styles.view_tree_title}>
+            {this.state.tree.nome_cientifico}
+          </Text>
+          <Text style={styles.view_tree_subtitle}>
+            {this.state.tree.nome_popular}
+          </Text>
+        </View>
+      </ScrollView>
     );
   }
 }

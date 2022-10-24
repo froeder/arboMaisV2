@@ -100,7 +100,18 @@ const styles = StyleSheet.create({
     width: "100%", 
     height: 200 ,
     alignSelf:'center',
+  },
+  view_tree_title:{
+    fontStyle: 'italic,',
+    fontSize:14,
+    textAlign: 'center'
+  },
+  view_tree_subtitle:{
+    fontStyle:'italic',
+    textAlign:'center',
+    fontSize:14
   }
+
 });
 
 export default styles;
