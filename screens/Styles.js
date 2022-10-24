@@ -96,6 +96,11 @@ const styles = StyleSheet.create({
     height:40,
     marginBottom:10,
   },
+  image_tree:{ 
+    width: "100%", 
+    height: 200 ,
+    alignSelf:'center',
+  }
 });
 
 export default styles;
