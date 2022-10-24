@@ -8,8 +8,9 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@freakycoder/react-native-bounceable": "^1.0.3",
     "@react-native-async-storage/async-storage": "~1.17.3",
-    "@react-native-masked-view/masked-view": "0.2.7",
+    "@react-native-masked-view/masked-view": "^0.2.6",
     "@react-navigation/bottom-tabs": "^6.4.0",
     "@react-navigation/drawer": "^6.5.0",
     "@react-navigation/native": "^6.0.11",
@@ -19,9 +20,13 @@
     "expo-constants": "~13.2.3",
     "firebase": "9.6.11",
     "formik": "2.1.4",
+    "moment": "^2.29.4",
     "react": "18.0.0",
     "react-dom": "18.0.0",
     "react-native": "0.69.4",
+    "react-native-animated-spinkit": "^1.5.2",
+    "react-native-button-toggle-group": "^1.1.2",
+    "react-native-dynamic-search-bar": "WrathChaos/react-native-dynamic-search-bar#expo",
     "react-native-gesture-handler": "~2.5.0",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-reanimated": "~2.9.1",
@@ -29,6 +34,9 @@
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7",
     "yup": "0.27.0"
+  },
+    "resolutions": {
+    "@react-native-masked-view/masked-view": "0.2.6"
   },
   "devDependencies": {
     "@babel/core": "^7.18.6",

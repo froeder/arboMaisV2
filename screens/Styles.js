@@ -46,16 +46,54 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  trees:{
+  trees_item:{
     flex:1,
     justifyContent:'center',
     height:80,
     backgroundColor: Colors.primaryTransparenci,
     margin:2,
+    marginBottom:8,
     padding:10,
-    borderRadius:5
+    paddingLeft:20,
+    borderRadius:15,
   },
-  text_trees:{color:'white'}
+  text_trees:{
+    color:'white',
+    fontSize:14
+  },
+  
+  title_item_tree:{
+    color:'white',
+    fontSize:17,
+    fontWeight:'bold'
+  },
+  tree_specie:{
+    color:'white',
+    fontSize:17,
+    fontStyle:'italic'
+  },
+  tree_name:{
+    flexDirection:'row',
+  },
+  tree_date:{
+    flexDirection:'row',
+    justifyContent: 'space-between'
+  },
+  tree_date_add:{
+    color:'white',
+    fontSize:14,
+    alignSelf:'flex-end',
+  },
+  search_bar:{ 
+    backgroundColor: Colors.primaryTransparenci, 
+    marginBottom:10,
+    height:40,
+    width: "100%" 
+  },
+  button_toggle_group:{
+    height:40,
+    marginBottom:10,
+  },
 });
 
 export default styles;

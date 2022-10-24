@@ -35,6 +35,7 @@ export default function AppStack() {
       <Drawer.Screen name="Início" component={HomeScreen} />
       <Drawer.Screen name="Adicionar" component={AddScreen} />
       <Drawer.Screen name="Perfil" component={ProfileScreen} />
+      <Drawer.Screen name="Usuários" component={ProfileScreen} />
       <Drawer.Screen name="Sobre" component={AboutScreen} />
     </Drawer.Navigator>
   );
