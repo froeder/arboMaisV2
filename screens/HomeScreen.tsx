@@ -45,7 +45,7 @@ export default class HomeScreen extends React.Component<Props, State> {
 
   filteHasComplete = () => {
     const newData = this.state.trees.filter((item) => {
-      if (item.falta_campos) return item;
+      return item.falta_campos === "Sim";
     });
 
     this.setState({ trees: newData });
@@ -53,8 +53,7 @@ export default class HomeScreen extends React.Component<Props, State> {
 
   filterHasPhoto = () => {
     const newData = this.state.trees.filter((item) => {
-      if (!item.primeira_foto) return false;
-      return item;
+      if (typeof item.primeira_foto !== "string") return item;
     });
 
     this.setState({ trees: newData });
@@ -100,7 +99,8 @@ export default class HomeScreen extends React.Component<Props, State> {
       </View>
       <View isSafe={false} style={styles.tree_date}>
         <Text style={styles.text_trees}>
-          {item.setor} - {item.falta_campos ? "Incompleto" : "Completo"} -{" "}
+          {item.setor} -{" "}
+          {item.falta_campos == "Não" ? "Completo" : "Incompleto"} -{" "}
           {item.primeira_foto ? "Com foto" : "Sem foto"}
         </Text>
         <Text style={styles.tree_date_add}>
