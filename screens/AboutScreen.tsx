@@ -14,7 +14,7 @@ export const AboutScreen = () => {
 
   return (
     <View isSafe={true} style={styles.container}>
-      <Text>Sobre</Text>
+      <Text>Sobre o app</Text>
       <Button style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Sair</Text>
       </Button>

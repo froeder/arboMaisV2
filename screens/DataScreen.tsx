@@ -5,7 +5,7 @@ import { View } from "../components";
 import styles from "./Styles";
 import { NavigationProp } from "@react-navigation/core";
 
-export default class AddScreen extends React.Component<Props, State> {
+export default class DataScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {};
@@ -14,7 +14,7 @@ export default class AddScreen extends React.Component<Props, State> {
   render() {
     return (
       <View isSafe={false} style={styles.container}>
-        <Text>Adicionar - essa vai dar trabalho</Text>
+        <Text>Dado offline</Text>
       </View>
     );
   }

@@ -14,7 +14,7 @@ export const ProfileScreen = () => {
 
   return (
     <View isSafe={true} style={styles.container}>
-      <Text>Perfil</Text>
+      <Text>Tela do perfil</Text>
       <Button style={styles.button} onPress={handleLogout}>
         <Text style={styles.buttonText}>Sair</Text>
       </Button>

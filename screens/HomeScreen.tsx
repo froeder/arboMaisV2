@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, Pressable, RefreshControl, Text } from "react-native";
-import { View } from "../components";
+import { Button, View } from "../components";
 import { signOut } from "firebase/auth";
 import styles from "./Styles";
 

@@ -9,6 +9,7 @@ import TreeViewScreen from "../screens/TreeViewScreen";
 import { ProfileScreen } from "../screens/ProfileScreen";
 import HomeScreen from "../screens/HomeScreen";
 import { AboutScreen } from "../screens/AboutScreen";
+import DataScreen from "../screens/DataScreen";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -49,6 +50,7 @@ export default function AppStack({ navigation, user }) {
       <Drawer.Screen name="Adicionar" component={AddScreen} />
       <Drawer.Screen name="Perfil" component={ProfileScreen} />
       <Drawer.Screen name="Usuários" component={ProfileScreen} />
+      <Drawer.Screen name="Dados" component={DataScreen} />
       <Drawer.Screen name="Sobre" component={AboutScreen} />
     </Drawer.Navigator>
   );
