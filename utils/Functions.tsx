@@ -4,6 +4,7 @@
  * @returns
  */
 export function formatedDate(date: string) {
+  if (!date.split("=")) return date;
   let data = date.split("-");
   let day = data[0];
   let month = data[1];

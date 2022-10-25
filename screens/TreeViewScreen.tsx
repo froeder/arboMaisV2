@@ -67,6 +67,37 @@ export default class TreeViewScreen extends React.Component<Props, State> {
             </View>
           </View>
         </View>
+        <View isSafe={false} style={{}}>
+          <Text style={styles.identification_section}>Dados da Árvore</Text>
+          <View isSafe={false} style={styles.column}>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Nome Científico:</Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.nome_cientifico ?? "Não informado"}
+              </Text>
+            </View>
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Familía: </Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.familia ?? "Não informado"}
+              </Text>
+            </View>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Gênero: </Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.genero ?? "Não informado"}
+              </Text>
+            </View>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Espécie: </Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.especie ?? "Não informado"}
+              </Text>
+            </View>
+          </View>
+        </View>
       </ScrollView>
     );
   }

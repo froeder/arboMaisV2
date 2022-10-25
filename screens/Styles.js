@@ -10,7 +10,7 @@ const styles = StyleSheet.create({
   },
   column:{
     flexDirection:'row',
-    justifyContent:'space-between',
+    justifyContent:'space-between'
 
   },
   logoContainer: {
@@ -127,13 +127,13 @@ const styles = StyleSheet.create({
   identification_text:{
     fontSize:16,
     marginTop:5,
-
   },
   bold:{
-    fontWeight:'bold'
+    fontWeight:'bold',
+    fontSize:15
   },
   section_values:{
-    marginTop:5
+    marginTop:10
   }
 
 });
