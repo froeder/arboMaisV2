@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   },
   text_trees:{
     color:'white',
-    fontSize:14
+    fontSize:15
   },
   
   title_item_tree:{
@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
   },
   tree_date:{
     flexDirection:'row',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    marginTop:5
   },
   tree_date_add:{
     color:'white',
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
     
   },
   button_toggle_group:{
-    height:40,
+    height:30,
     marginBottom:10,
   },
   image_tree:{ 

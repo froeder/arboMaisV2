@@ -1,10 +1,8 @@
 import React from "react";
-import { FlatList, Pressable, StyleSheet, Text } from "react-native";
-import { View, TextInput, Logo, Button, FormErrorMessage } from "../components";
+import { FlatList, Pressable, RefreshControl, Text } from "react-native";
+import { View } from "../components";
 import { signOut } from "firebase/auth";
-//Import styles
 import styles from "./Styles";
-import { Trees } from "../utils/Types";
 
 import { auth, Colors } from "../config";
 import { getCollection } from "../services/FirebaseService";
@@ -19,21 +17,62 @@ export default class HomeScreen extends React.Component<Props, State> {
       trees: {},
       searchText: "",
       filter: "Tudo",
+      loading: true,
     };
   }
+
   handleLogout = () => {
     signOut(auth).catch((error) => console.log("Error logging out: ", error));
   };
 
-  getTrees = async () => {
-    const trees = await getCollection("arvores");
-    this.setState({ trees });
+  /**
+   *
+   * @param order
+   * @param direction
+   */
+  getTrees = async (order, direction) => {
+    const trees = await getCollection("arvores", order, direction);
+    this.setState({ trees: trees, loading: false });
   };
 
-  onPress = (item: Trees) => {
+  /**
+   *
+   * @param item
+   */
+  onPress = (item: any) => {
     this.props.navigation.navigate("Visualizar Árvore", { tree: item });
   };
 
+  onPressSearchClear = () => {
+    this.filterList("");
+    this.setState({ searchText: "" });
+    this.getTrees("numero", "asc");
+  };
+
+  /**
+   *
+   * @param text
+   */
+  onChangeTextSearch(text) {
+    this.filterList(text);
+    this.setState({ searchText: text });
+  }
+
+  /**
+   *
+   * @param val
+   */
+  onSelectButton(val) {
+    this.setLoadingState(true);
+    this.filterButtonGroup(val);
+    this.setState({ filter: val });
+  }
+
+  /**
+   *
+   * @param date
+   * @returns
+   */
   formatedDate(date: string) {
     let data = date.split("-");
     let day = data[0];
@@ -43,35 +82,60 @@ export default class HomeScreen extends React.Component<Props, State> {
     return formated_date;
   }
 
-  filteHasComplete = () => {
+  /**
+   *
+   * @param loading
+   */
+  setLoadingState = (loading: boolean) => {
+    this.setState({ loading: loading });
+  };
+
+  filteHasComplete = async () => {
+    await this.getTrees("numero", "asc");
+
     const newData = this.state.trees.filter((item) => {
       return item.falta_campos === "Sim";
     });
 
-    this.setState({ trees: newData });
+    this.setState({ trees: newData, loading: false });
   };
 
-  filterHasPhoto = () => {
+  filterHasPhoto = async () => {
+    await this.getTrees("numero", "asc");
+
     const newData = this.state.trees.filter((item) => {
       if (typeof item.primeira_foto !== "string") return item;
     });
 
-    this.setState({ trees: newData });
+    this.setState({ trees: newData, loading: false });
   };
 
-  filterButtonGroup(val) {
+  /**
+   *
+   * @param val
+   */
+  filterButtonGroup(val: string) {
     if (val == "Incompleto") {
+      this.getTrees("numero", "asc");
       this.filteHasComplete();
     } else if (val == "Sem Foto") {
       this.filterHasPhoto();
+    } else if (val == "Recentes") {
+      this.getTrees("numero", "desc");
     } else {
-      this.getTrees();
+      this.getTrees("numero", "asc");
     }
   }
 
+  /**
+   *
+   * @param text
+   * @returns
+   */
   filterList = (text: string) => {
+    this.setLoadingState(true);
     if (text === "") {
-      this.getTrees();
+      this.getTrees("numero", "asc");
       return;
     }
     const newData = this.state.trees.filter((item) => {
@@ -81,11 +145,11 @@ export default class HomeScreen extends React.Component<Props, State> {
       return itemData.indexOf(textData) > -1;
     });
 
-    this.setState({ trees: newData });
+    this.setState({ trees: newData, loading: false });
   };
 
   componentDidMount() {
-    this.getTrees();
+    this.getTrees("numero", "asc");
   }
 
   renderItem = ({ item }) => (
@@ -119,33 +183,35 @@ export default class HomeScreen extends React.Component<Props, State> {
           clearIconImageStyle={{ tintColor: "#FFFFFF" }}
           searchIconImageStyle={{ tintColor: "#FFFFFF" }}
           onChangeText={(text) => {
-            this.setState({ searchText: text });
-            this.filterList(text);
+            this.onChangeTextSearch(text);
           }}
           onPress={() => this.filterList(this.state.searchText)}
           onSearchPress={() => this.filterList(this.state.searchText)}
-          onClearPress={() => {
-            this.filterList("");
-            this.getTrees();
-          }}
+          onClearPress={this.onPressSearchClear}
         />
         <ButtonToggleGroup
           style={styles.button_toggle_group}
+          textStyle={{ fontSize: 10 }}
           highlightBackgroundColor={Colors.primary}
           highlightTextColor={"white"}
           inactiveBackgroundColor={"transparent"}
           inactiveTextColor={"grey"}
-          values={["Tudo", "Incompleto", "Sem Foto"]}
+          values={["Tudo", "Incompleto", "Sem Foto", "Recentes"]}
           value={this.state.filter}
           onSelect={(val) => {
-            this.filterButtonGroup(val);
-            this.setState({ filter: val });
+            this.onSelectButton(val);
           }}
         />
         <FlatList
           data={this.state.trees}
           keyExtractor={(item) => item.id}
           renderItem={this.renderItem}
+          refreshControl={
+            <RefreshControl
+              refreshing={this.state.loading}
+              onRefresh={() => this.getTrees("numero", "asc")}
+            />
+          }
         />
       </View>
     );
@@ -156,8 +222,9 @@ type State = {
   trees: any;
   searchText: string;
   filter: string;
+  loading: boolean;
 };
 
 type Props = {
-  navigation: NavigationProp<null>;
+  navigation: NavigationProp<any>;
 };
