@@ -8,6 +8,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginTop:10
   },
+  column:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+
+  },
   logoContainer: {
     alignItems: 'center'
   },
@@ -105,12 +110,30 @@ const styles = StyleSheet.create({
   view_tree_title:{
     fontStyle: 'italic,',
     fontSize:14,
-    textAlign: 'center'
+    textAlign: 'center',
+    marginTop:5
   },
   view_tree_subtitle:{
     fontStyle:'italic',
     textAlign:'center',
     fontSize:14
+  },
+  identification_section:{
+    fontSize:18,
+    fontWeight:'900',
+    marginTop:15,
+    alignSelf:"center"
+  },
+  identification_text:{
+    fontSize:16,
+    marginTop:5,
+
+  },
+  bold:{
+    fontWeight:'bold'
+  },
+  section_values:{
+    marginTop:5
   }
 
 });

@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, Pressable, RefreshControl, Text } from "react-native";
-import { Button, View } from "../components";
+import { View } from "../components";
 import { signOut } from "firebase/auth";
 import styles from "./Styles";
 
@@ -9,12 +9,13 @@ import { getCollection } from "../services/FirebaseService";
 import { NavigationProp } from "@react-navigation/core";
 import SearchBar from "react-native-dynamic-search-bar";
 import ButtonToggleGroup from "react-native-button-toggle-group";
-
+import { Trees } from "../utils/Types";
+import { formatedDate } from "../utils/Functions";
 export default class HomeScreen extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      trees: {},
+      trees: [],
       searchText: "",
       filter: "Tudo",
       loading: true,
@@ -66,20 +67,6 @@ export default class HomeScreen extends React.Component<Props, State> {
     this.setLoadingState(true);
     this.filterButtonGroup(val);
     this.setState({ filter: val });
-  }
-
-  /**
-   *
-   * @param date
-   * @returns
-   */
-  formatedDate(date: string) {
-    let data = date.split("-");
-    let day = data[0];
-    let month = data[1];
-    let year = date.split("-")[2].split("T")[0];
-    let formated_date = day + "/" + month + "/" + year;
-    return formated_date;
   }
 
   /**
@@ -167,7 +154,7 @@ export default class HomeScreen extends React.Component<Props, State> {
           {item.primeira_foto ? "Com foto" : "Sem foto"}
         </Text>
         <Text style={styles.tree_date_add}>
-          {this.formatedDate(item.data_atual_enviada)}
+          {formatedDate(item.data_atual_enviada)}
         </Text>
       </View>
     </Pressable>
@@ -219,7 +206,7 @@ export default class HomeScreen extends React.Component<Props, State> {
 }
 
 type State = {
-  trees: any;
+  trees: Array<Trees>;
   searchText: string;
   filter: string;
   loading: boolean;

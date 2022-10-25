@@ -5,6 +5,8 @@ import { View } from "../components";
 import styles from "./Styles";
 import { NavigationProp, RouteProp } from "@react-navigation/core";
 import { getPhoto } from "../services/FirebaseService";
+import { Trees } from "../utils/Types";
+import { formatedDate } from "../utils/Functions";
 
 export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -42,13 +44,36 @@ export default class TreeViewScreen extends React.Component<Props, State> {
             {this.state.tree.nome_popular}
           </Text>
         </View>
+        <View isSafe={false} style={{}}>
+          <Text style={styles.identification_section}>Identificação</Text>
+          <View isSafe={false} style={styles.column}>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>ID:</Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.numero}
+              </Text>
+            </View>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Adicionada em: </Text>
+              <Text style={styles.identification_text}>
+                {formatedDate(this.state.tree.data_atual_enviada)}
+              </Text>
+            </View>
+            <View isSafe={false} style={styles.section_values}>
+              <Text style={styles.bold}>Setor: </Text>
+              <Text style={styles.identification_text}>
+                {this.state.tree.setor}
+              </Text>
+            </View>
+          </View>
+        </View>
       </ScrollView>
     );
   }
 }
 
 type State = {
-  tree: any;
+  tree: Trees;
   arvore1_url: string;
 };
 
