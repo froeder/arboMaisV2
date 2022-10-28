@@ -119,10 +119,10 @@ const styles = StyleSheet.create({
     fontSize:14
   },
   identification_section:{
-    fontSize:18,
-    fontWeight:'900',
+    fontSize:20,
+    fontWeight:'700',
     marginTop:15,
-    alignSelf:"center"
+    alignSelf:"flex-start"
   },
   identification_text:{
     fontSize:16,
