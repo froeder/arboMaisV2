@@ -50,4 +50,8 @@ export type Trees = {
   trafego_pedestres: String;
   trafego_veiculos: String;
   local_ataque: String;
+  acao_executada: String;
+  acao_recomendada: String;
+  observacoes_gerais: String;
+  obter_foto_familia: String;
 };

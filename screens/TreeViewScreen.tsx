@@ -110,7 +110,7 @@ export default class TreeViewScreen extends React.Component<Props, State> {
           </View>
           <View isSafe={false} style={styles.column}>
             <ViewItemTree
-              title="Distância da calçada::"
+              title="Distância da calçada (m):"
               description={this.state.tree.calcada ?? "Não informado"}
             />
           </View>
@@ -233,6 +233,29 @@ export default class TreeViewScreen extends React.Component<Props, State> {
             <ViewItemTree
               title="Muro/Construção"
               description={this.state.tree.muro_construcao}
+            />
+          </View>
+        </View>
+        <View isSafe={false} style={{}}>
+          <Text style={styles.identification_section}>Definição de Ações</Text>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Ação Executada:"
+              description={this.state.tree.fenologia}
+            />
+            <ViewItemTree
+              title="Qualidade da Ação:"
+              description={this.state.tree.qualidade_acao}
+            />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Ação Recomendada:"
+              description={this.state.tree.acao_recomendada}
+            />
+            <ViewItemTree
+              title="Observações Gerais:"
+              description={this.state.tree.observacoes_gerais}
             />
           </View>
         </View>
