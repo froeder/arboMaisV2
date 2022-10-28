@@ -37,4 +37,17 @@ export type Trees = {
   injurias: String;
   iluminacao: String;
   ecologia: String;
+  local_geral: String;
+  localizacao_relativa: String;
+  manilha: String;
+  muro_construcao: String;
+  participacao: String;
+  pavimento: String;
+  posteamento: String;
+  qualidade_acao: String;
+  recuo: String;
+  sinalizacao: String;
+  trafego_pedestres: String;
+  trafego_veiculos: String;
+  local_ataque: String;
 };

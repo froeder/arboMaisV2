@@ -1,12 +1,12 @@
 import React from "react";
 import { Image, ScrollView, Text } from "react-native";
 import { LoadingIndicator, View } from "../components";
-//Import styles
 import styles from "./Styles";
 import { NavigationProp, RouteProp } from "@react-navigation/core";
 import { getPhoto } from "../services/FirebaseService";
 import { Trees } from "../utils/Types";
 import { formatedDate } from "../utils/Functions";
+import { ViewItemTree } from "../components/ViewItemTree";
 
 export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -49,171 +49,191 @@ export default class TreeViewScreen extends React.Component<Props, State> {
         <View isSafe={false} style={{}}>
           <Text style={styles.identification_section}>Identificação</Text>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>ID:</Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.numero}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Adicionada em: </Text>
-              <Text style={styles.identification_text}>
-                {formatedDate(this.state.tree.data_atual_enviada)}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Setor: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.setor}
-              </Text>
-            </View>
+            <ViewItemTree title="ID:" description={this.state.tree.numero} />
+            <ViewItemTree
+              title="Adicionada em:"
+              description={formatedDate(this.state.tree.data_atual_enviada)}
+            />
+            <ViewItemTree title="Setor:" description={this.state.tree.setor} />
           </View>
         </View>
         <View isSafe={false} style={{}}>
           <Text style={styles.identification_section}>Dados da Árvore</Text>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Nome Científico:</Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.nome_cientifico ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Nome Científico:"
+              description={this.state.tree.nome_cientifico ?? "Não informado"}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Familía: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.familia ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Gênero: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.genero ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Espécie: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.especie ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Familía:"
+              description={this.state.tree.familia ?? "Não informado"}
+            />
+            <ViewItemTree
+              title="Gênero:"
+              description={this.state.tree.genero ?? "Não informado"}
+            />
+            <ViewItemTree
+              title="Espécie:"
+              description={this.state.tree.especie ?? "Não informado"}
+            />
           </View>
         </View>
         <View isSafe={false} style={{}}>
           <Text style={styles.identification_section}>Circunferências</Text>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>C90 cm: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.c90 ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>C130 cm: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.c130 ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>C150 cm: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.c150 ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="C90 cm:"
+              description={this.state.tree.c90 ?? "Não informado"}
+            />
+            <ViewItemTree
+              title="C130 cm:"
+              description={this.state.tree.c130 ?? "Não informado"}
+            />
+            <ViewItemTree
+              title="C150 cm:"
+              description={this.state.tree.c150 ?? "Não informado"}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Altura primeira ramificação: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.altura_primeira_ramificacao ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Altura opção: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.altura_opcao ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Altura primeira ramificação:"
+              description={
+                this.state.tree.altura_primeira_ramificacao ?? "Não informado"
+              }
+            />
+            <ViewItemTree
+              title="Altura opção:"
+              description={this.state.tree.altura_opcao ?? "Não informado"}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}> Distância da calçada: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.calcada ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}> Distância da calçada: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.calcada ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Distância da calçada::"
+              description={this.state.tree.calcada ?? "Não informado"}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}> Arquitetura da copa: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.arq_copa ?? "Não informado"}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}> É palmeira: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.palmeira ?? "Não informado"}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Arquitetura da copa:"
+              description={this.state.tree.arq_copa ?? "Não informado"}
+            />
+            <ViewItemTree
+              title="É palmeira:"
+              description={this.state.tree.palmeira ?? "Não informado"}
+            />
           </View>
         </View>
         <View isSafe={false} style={{}}>
           <Text style={styles.identification_section}>Biologia</Text>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Estado geral:</Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.estado_geral}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Equilíbrio: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.equilibrio}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Equilíbrio geral: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.equilibrio_geral}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Estado geral:"
+              description={this.state.tree.estado_geral}
+            />
+            <ViewItemTree
+              title="Equilíbrio:"
+              description={this.state.tree.equilibrio}
+            />
+            <ViewItemTree
+              title="Equilíbrio geral:"
+              description={this.state.tree.equilibrio_geral}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Fitossanidade: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.fito}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Injúrias: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.fito}
-              </Text>
-            </View>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Ecologia: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.ecologia}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Fitossanidade:"
+              description={this.state.tree.fito}
+            />
+            <ViewItemTree
+              title="Injúrias:"
+              description={this.state.tree.fito}
+            />
+            <ViewItemTree
+              title="Ecologia:"
+              description={this.state.tree.ecologia}
+            />
           </View>
           <View isSafe={false} style={styles.column}>
-            <View isSafe={false} style={styles.section_values}>
-              <Text style={styles.bold}>Fenologia: </Text>
-              <Text style={styles.identification_text}>
-                {this.state.tree.fenologia}
-              </Text>
-            </View>
+            <ViewItemTree
+              title="Fenologia:"
+              description={this.state.tree.fenologia}
+            />
+          </View>
+        </View>
+        <View isSafe={false} style={{}}>
+          <Text style={styles.identification_section}>
+            Entorno e Inteferências
+          </Text>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Local Geral:"
+              description={this.state.tree.local_geral}
+            />
+            <ViewItemTree
+              title="Localização Relativa:"
+              description={this.state.tree.localizacao_relativa}
+            />
+            <ViewItemTree
+              title="Pavimento:"
+              description={this.state.tree.pavimento}
+            />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Afloramento de raiz:"
+              description={this.state.tree.afloram_raiz}
+            />
+            <ViewItemTree
+              title="Participação na paisagem:"
+              description={this.state.tree.participacao}
+            />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Fiação:"
+              description={this.state.tree.fiacao ?? "Inexistente"}
+            />
+            <ViewItemTree
+              title="Posteamento:"
+              description={this.state.tree.posteamento}
+            />
+            <ViewItemTree
+              title="Iluminação:"
+              description={this.state.tree.iluminacao}
+            />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Placas:"
+              description={this.state.tree.sinalizacao}
+            />
+            <ViewItemTree
+              title="Tráfego de Veículos:"
+              description={this.state.tree.trafego_veiculos}
+            />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Tráfego de Pedestres:"
+              description={this.state.tree.trafego_pedestres}
+            />
+            <ViewItemTree title="Recuo:" description={this.state.tree.recuo} />
+          </View>
+          <View isSafe={false} style={styles.column}>
+            <ViewItemTree
+              title="Manilha:"
+              description={this.state.tree.manilha}
+            />
+            <ViewItemTree
+              title="Colo pavimentado"
+              description={this.state.tree.colo_pavimentado}
+            />
+            <ViewItemTree
+              title="Muro/Construção"
+              description={this.state.tree.muro_construcao}
+            />
           </View>
         </View>
       </ScrollView>
