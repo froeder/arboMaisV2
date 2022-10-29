@@ -7,6 +7,7 @@ import { getPhoto } from "../services/FirebaseService";
 import { Trees } from "../utils/Types";
 import { formatedDate } from "../utils/Functions";
 import { ViewItemTree } from "../components/ViewItemTree";
+import Carousel from "react-native-reanimated-carousel";
 
 export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -14,17 +15,35 @@ export default class TreeViewScreen extends React.Component<Props, State> {
     this.state = {
       tree: this.props.route.params.tree,
       arvore1_url: "",
+      arvore2_url: "",
+      arvore3_url: "",
+      images: [],
     };
   }
 
+  getPhotoUrl = async (id, arvore) => {
+    const photoUrl = await getPhoto(id, arvore);
+    return photoUrl;
+  };
+
   async componentDidMount() {
-    const arvore1_url = await getPhoto(
+    const arvore1_url = await this.getPhotoUrl(
       this.state.tree.primeira_foto,
       "arvore1"
     );
+    const arvore2_url = await this.getPhotoUrl(
+      this.state.tree.primeira_foto,
+      "arvore2"
+    );
+    const arvore3_url = await this.getPhotoUrl(
+      this.state.tree.primeira_foto,
+      "arvore3"
+    );
     this.setState({
-      arvore1_url: arvore1_url,
+      images: [arvore1_url, arvore2_url, arvore3_url],
     });
+
+    console.log(this.state.images);
   }
 
   render() {
@@ -38,7 +57,24 @@ export default class TreeViewScreen extends React.Component<Props, State> {
         ) : (
           <LoadingIndicator />
         )}
-        <View isSafe={false}>
+        {this.state.arvore2_url ? (
+          <Image
+            style={styles.image_tree}
+            source={{ uri: this.state.arvore2_url }}
+          />
+        ) : (
+          <LoadingIndicator />
+        )}
+        {this.state.arvore3_url ? (
+          <Image
+            style={styles.image_tree}
+            source={{ uri: this.state.arvore3_url }}
+          />
+        ) : (
+          <LoadingIndicator />
+        )}
+
+        <View isSafe={false} style={{}}>
           <Text style={styles.view_tree_title}>
             {this.state.tree.nome_cientifico}
           </Text>
@@ -136,16 +172,18 @@ export default class TreeViewScreen extends React.Component<Props, State> {
               title="Equilíbrio:"
               description={this.state.tree.equilibrio}
             />
+          </View>
+          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Equilíbrio geral:"
               description={this.state.tree.equilibrio_geral}
             />
-          </View>
-          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Fitossanidade:"
               description={this.state.tree.fito}
             />
+          </View>
+          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Injúrias:"
               description={this.state.tree.fito}
@@ -175,26 +213,28 @@ export default class TreeViewScreen extends React.Component<Props, State> {
               title="Localização Relativa:"
               description={this.state.tree.localizacao_relativa}
             />
+          </View>
+          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Pavimento:"
               description={this.state.tree.pavimento}
             />
-          </View>
-          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Afloramento de raiz:"
               description={this.state.tree.afloram_raiz}
             />
+          </View>
+          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Participação na paisagem:"
               description={this.state.tree.participacao}
             />
-          </View>
-          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Fiação:"
               description={this.state.tree.fiacao ?? "Inexistente"}
             />
+          </View>
+          <View isSafe={false} style={styles.column}>
             <ViewItemTree
               title="Posteamento:"
               description={this.state.tree.posteamento}
@@ -267,6 +307,9 @@ export default class TreeViewScreen extends React.Component<Props, State> {
 type State = {
   tree: Trees;
   arvore1_url: string;
+  arvore2_url: string;
+  arvore3_url: string;
+  images: Array<string>;
 };
 
 type Props = {

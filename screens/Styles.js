@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
     fontSize:20,
     fontWeight:'700',
     marginTop:15,
-    alignSelf:"flex-start"
+    alignSelf:"flex-start",
+    color: Colors.primary
   },
   identification_text:{
     fontSize:16,
@@ -130,10 +131,11 @@ const styles = StyleSheet.create({
   },
   bold:{
     fontWeight:'bold',
-    fontSize:15
+    fontSize:15,
+    color: Colors.mediumGray
   },
   section_values:{
-    marginTop:10
+    marginTop:10,
   }
 
 });

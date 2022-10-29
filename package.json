@@ -28,14 +28,16 @@
     "react-native-button-toggle-group": "^1.1.2",
     "react-native-dynamic-search-bar": "WrathChaos/react-native-dynamic-search-bar#expo",
     "react-native-gesture-handler": "~2.5.0",
+    "react-native-image-slider-box": "megamaxs1234/react-native-image-slider-box",
     "react-native-keyboard-aware-scroll-view": "^0.9.4",
     "react-native-reanimated": "~2.9.1",
+    "react-native-reanimated-carousel": "^3.1.1",
     "react-native-safe-area-context": "4.3.1",
     "react-native-screens": "~3.15.0",
     "react-native-web": "~0.18.7",
     "yup": "0.27.0"
   },
-    "resolutions": {
+  "resolutions": {
     "@react-native-masked-view/masked-view": "0.2.6"
   },
   "devDependencies": {
