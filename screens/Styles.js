@@ -36,6 +36,21 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: Colors.primary
   },
+  footer_tree:{
+    flexDirection:'row',
+    justifyContent:'space-between',
+    margin:10
+  },
+  button_footer_tree: {
+    backgroundColor: Colors.primary,
+    padding: 10,
+    borderRadius:5,
+    width: "48%"
+  },
+  button_footer_tree_text:{
+    color: Colors.white,
+    alignSelf: "center",
+  },
   button: {
     width: windowWidth,
     justifyContent: 'center',
@@ -45,6 +60,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderRadius: 8
   },
+  
   buttonText: {
     fontSize: 20,
     color: Colors.white,
