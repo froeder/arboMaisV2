@@ -8,6 +8,7 @@ import { Trees } from "../utils/Types";
 import { formatedDate } from "../utils/Functions";
 import { ViewItemTree } from "../components/ViewItemTree";
 import Carousel from "react-native-reanimated-carousel";
+import { FlatList } from "react-native-gesture-handler";
 
 export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -27,18 +28,10 @@ export default class TreeViewScreen extends React.Component<Props, State> {
   };
 
   async componentDidMount() {
-    const arvore1_url = await this.getPhotoUrl(
-      this.state.tree.primeira_foto,
-      "arvore1"
-    );
-    const arvore2_url = await this.getPhotoUrl(
-      this.state.tree.primeira_foto,
-      "arvore2"
-    );
-    const arvore3_url = await this.getPhotoUrl(
-      this.state.tree.primeira_foto,
-      "arvore3"
-    );
+    const id = this.state.tree.primeira_foto;
+    const arvore1_url = await this.getPhotoUrl(id, "arvore1");
+    const arvore2_url = await this.getPhotoUrl(id, "arvore2");
+    const arvore3_url = await this.getPhotoUrl(id, "arvore3");
     this.setState({
       images: [arvore1_url, arvore2_url, arvore3_url],
     });
@@ -49,26 +42,14 @@ export default class TreeViewScreen extends React.Component<Props, State> {
   render() {
     return (
       <ScrollView style={styles.container}>
-        {this.state.arvore1_url ? (
-          <Image
-            style={styles.image_tree}
-            source={{ uri: this.state.arvore1_url }}
-          />
-        ) : (
-          <LoadingIndicator />
-        )}
-        {this.state.arvore2_url ? (
-          <Image
-            style={styles.image_tree}
-            source={{ uri: this.state.arvore2_url }}
-          />
-        ) : (
-          <LoadingIndicator />
-        )}
-        {this.state.arvore3_url ? (
-          <Image
-            style={styles.image_tree}
-            source={{ uri: this.state.arvore3_url }}
+        {this.state.images.length ? (
+          <FlatList
+            horizontal={true}
+            data={this.state.images}
+            renderItem={({ item }) => (
+              <Image style={styles.images_carousel} source={{ uri: item }} />
+            )}
+            keyExtractor={(item, index) => index.toString()}
           />
         ) : (
           <LoadingIndicator />

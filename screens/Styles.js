@@ -1,5 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Dimensions, StyleSheet } from "react-native";
 import { Colors } from "../config";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     color: Colors.primary
   },
   button: {
-    width: '100%',
+    width: windowWidth,
     justifyContent: 'center',
     alignItems: 'center',
     marginTop: 8,
@@ -95,7 +98,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.primaryTransparenci, 
     marginBottom:10,
     height:40,
-    width: "100%" ,
+    width: windowWidth - 20,
     
   },
   button_toggle_group:{
@@ -106,6 +109,10 @@ const styles = StyleSheet.create({
     width: "100%", 
     height: 200 ,
     alignSelf:'center',
+  },
+  images_carousel:{
+     width: windowWidth - 30, 
+     height: windowHeight / 3.5 
   },
   view_tree_title:{
     fontStyle: 'italic,',
