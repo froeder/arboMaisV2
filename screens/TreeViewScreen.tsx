@@ -35,31 +35,24 @@ export default class TreeViewScreen extends React.Component<Props, State> {
     if (status === "granted") {
       const asset = await MediaLibrary.createAssetAsync(fileUri);
       await MediaLibrary.createAlbumAsync("ArboMais", asset, false).then(() => {
-        alert("Imagem salva com sucesso!");
+        alert("Imagens salvas com sucesso!");
       });
     }
   };
 
-  pressDownload = async () => {
-    const id = this.state.tree.id;
-    this.donwloadPhotos(id, "arvore1");
-    //this.donwloadPhotos(id, "arvore2");
-    //this.donwloadPhotos(id, "arvore3");
-  };
+  donwloadPhotos = async () => {
+    const { images } = this.state;
 
-  donwloadPhotos = async (id, arvore) => {
-    //const url = await downloadPhotos(id, arvore);
-    console.log(id);
-    return;
-
-    let fileUri = FileSystem.documentDirectory + "image1.jpeg";
-    FileSystem.downloadAsync(url, fileUri)
-      .then(({ uri }) => {
-        this.saveFile(uri);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    images.forEach((item, index) => {
+      let fileUri = FileSystem.documentDirectory + `image${index}.jpeg`;
+      FileSystem.downloadAsync(item, fileUri)
+        .then(({ uri }) => {
+          this.saveFile(uri);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    });
   };
 
   async componentDidMount() {
