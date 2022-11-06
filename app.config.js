@@ -10,7 +10,7 @@ export default {
     orientation: 'portrait',
     icon: './assets/icon.png',
     splash: {
-      image: './assets/splash.png',
+      image: './assets/icon.png',
       resizeMode: 'cover',
       backgroundColor: '#9EA71D'
     },

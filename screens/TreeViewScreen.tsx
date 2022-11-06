@@ -3,12 +3,14 @@ import { Image, ScrollView, Text } from "react-native";
 import { Button, LoadingIndicator, View } from "../components";
 import styles from "./Styles";
 import { NavigationProp, RouteProp } from "@react-navigation/core";
-import { getPhoto } from "../services/FirebaseService";
+import { getPhoto, downloadPhotosUrl } from "../services/FirebaseService";
 import { Trees } from "../utils/Types";
 import { formatedDate } from "../utils/Functions";
 import { ViewItemTree } from "../components/ViewItemTree";
-import Carousel from "react-native-reanimated-carousel";
 import { FlatList } from "react-native-gesture-handler";
+import * as MediaLibrary from "expo-media-library";
+import * as FileSystem from "expo-file-system";
+import * as Permissions from "expo-permissions";
 
 export default class TreeViewScreen extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -26,6 +28,38 @@ export default class TreeViewScreen extends React.Component<Props, State> {
   getPhotoUrl = async (id, arvore) => {
     const photoUrl = await getPhoto(id, arvore);
     return photoUrl;
+  };
+
+  saveFile = async (fileUri: string) => {
+    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    if (status === "granted") {
+      const asset = await MediaLibrary.createAssetAsync(fileUri);
+      await MediaLibrary.createAlbumAsync("ArboMais", asset, false).then(() => {
+        alert("Imagem salva com sucesso!");
+      });
+    }
+  };
+
+  pressDownload = async () => {
+    const id = this.state.tree.id;
+    this.donwloadPhotos(id, "arvore1");
+    //this.donwloadPhotos(id, "arvore2");
+    //this.donwloadPhotos(id, "arvore3");
+  };
+
+  donwloadPhotos = async (id, arvore) => {
+    //const url = await downloadPhotos(id, arvore);
+    console.log(id);
+    return;
+
+    let fileUri = FileSystem.documentDirectory + "image1.jpeg";
+    FileSystem.downloadAsync(url, fileUri)
+      .then(({ uri }) => {
+        this.saveFile(uri);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   async componentDidMount() {
@@ -133,6 +167,10 @@ export default class TreeViewScreen extends React.Component<Props, State> {
             </View>
             <View isSafe={false} style={styles.column}>
               <ViewItemTree
+                title="Distância da rua (m):"
+                description={this.state.tree.rua ?? "Não informado"}
+              />
+              <ViewItemTree
                 title="Distância da calçada (m):"
                 description={this.state.tree.calcada ?? "Não informado"}
               />
@@ -159,32 +197,50 @@ export default class TreeViewScreen extends React.Component<Props, State> {
                 title="Equilíbrio:"
                 description={this.state.tree.equilibrio}
               />
-            </View>
-            <View isSafe={false} style={styles.column}>
               <ViewItemTree
                 title="Equilíbrio geral:"
                 description={this.state.tree.equilibrio_geral}
               />
+            </View>
+            <View isSafe={false} style={styles.column}>
               <ViewItemTree
                 title="Fitossanidade:"
                 description={this.state.tree.fito}
               />
+              <ViewItemTree
+                title="Intensidade:"
+                description={this.state.tree.intensidade}
+              />
             </View>
             <View isSafe={false} style={styles.column}>
+              <ViewItemTree
+                title="Local do ataque:"
+                description={this.state.tree.local_ataque}
+              />
+              <View isSafe={false} style={styles.section_values}>
+                <Text style={styles.bold}>Local do ataque: </Text>
+                {this.state.tree.local_ataque.map((item) => (
+                  <Text style={styles.identification_text}>{item}</Text>
+                ))}
+              </View>
               <ViewItemTree
                 title="Injúrias:"
-                description={this.state.tree.fito}
-              />
-              <ViewItemTree
-                title="Ecologia:"
-                description={this.state.tree.ecologia}
+                description={this.state.tree.injurias}
               />
             </View>
             <View isSafe={false} style={styles.column}>
-              <ViewItemTree
-                title="Fenologia:"
-                description={this.state.tree.fenologia}
-              />
+              <View isSafe={false} style={styles.section_values}>
+                <Text style={styles.bold}>Ecologia </Text>
+                {this.state.tree.ecologia.map((item) => (
+                  <Text style={styles.identification_text}>{item}</Text>
+                ))}
+              </View>
+              <View isSafe={false} style={styles.section_values}>
+                <Text style={styles.bold}>Fenologia </Text>
+                {this.state.tree.fenologia.map((item) => (
+                  <Text style={styles.identification_text}>{item}</Text>
+                ))}
+              </View>
             </View>
           </View>
           <View isSafe={false} style={{}}>
@@ -271,10 +327,13 @@ export default class TreeViewScreen extends React.Component<Props, State> {
               Definição de Ações
             </Text>
             <View isSafe={false} style={styles.column}>
-              <ViewItemTree
-                title="Ação Executada:"
-                description={this.state.tree.fenologia}
-              />
+              <View isSafe={false} style={styles.section_values}>
+                <Text style={styles.bold}>Ação Executada </Text>
+                {this.state.tree.acao_executada.map((item) => (
+                  <Text style={styles.identification_text}>{item}</Text>
+                ))}
+              </View>
+
               <ViewItemTree
                 title="Qualidade da Ação:"
                 description={this.state.tree.qualidade_acao}
@@ -296,7 +355,7 @@ export default class TreeViewScreen extends React.Component<Props, State> {
           <Button
             title="download"
             style={styles.button_footer_tree}
-            onPress={{}}
+            onPress={this.donwloadPhotos}
           >
             <Text style={styles.button_footer_tree_text}>Baixar Fotos</Text>
           </Button>

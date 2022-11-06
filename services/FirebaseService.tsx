@@ -41,3 +41,14 @@ export async function getPhoto(id, arvore) {
     return url;
   } catch (error) {}
 }
+
+export async function downloadPhotosUrl(id, arvore) {
+  try {
+    const storageRef = ref(storage, `${id}/${arvore}.jpeg`);
+    const url = await getDownloadURL(storageRef);
+    console.log(url);
+    return url;
+  } catch (error) {
+    console.log(error);
+  }
+}
